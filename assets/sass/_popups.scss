@@ -1,0 +1,78 @@
+@use "mixins";
+@use "helpers";
+@use "variables";
+
+.elementor-popup-modal {
+    &:not(.video-popup) {
+        .dialog-widget-content {
+            overflow: hidden!important;
+            .dialog-message {
+                overflow: scroll!important;
+                .elementor {
+                    height: 100%;
+                }
+            }
+            a.dialog-close-button {
+                width: 32px;
+                height: 32px;
+                &:hover {
+                    i {
+                        &:before {
+                            transform: scale(1.1);
+                        }
+                    }
+                }
+                i {
+                    &:before {
+                        content: '';
+                        display: inline-block;
+                        width: 32px;
+                        height: 32px;
+                        mask-image: url('/wp-content/uploads/2025/02/x-close.svg');
+                        mask-size: 32px;
+                        will-change: transform;
+                        background-color: variables.$black;
+                        @include mixins.transition-all(.4s);
+                    }
+                }
+            }   
+        }
+    }
+    
+}
+
+.video-popup {
+    backdrop-filter: blur(4px);
+    .dialog-widget-content {
+        a.dialog-close-button {
+            width: 32px;
+            height: 32px;
+            &:hover {
+                i {
+                    &:before {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+            i {
+                &:before {
+                    content: '';
+                    display: inline-block;
+                    width: 32px;
+                    height: 32px;
+                    mask-image: url('/wp-content/uploads/2025/02/x-close.svg');
+                    mask-size: 32px;
+                    will-change: transform;
+                    background-color: variables.$white;
+                    @include mixins.transition-all(.4s);
+                }
+            }
+        }  
+    }
+}
+
+.full-width-popup {
+    .dialog-lightbox-message {
+        max-width: 1360px!important;
+    }
+}

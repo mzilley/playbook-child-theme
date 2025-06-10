@@ -1,0 +1,52 @@
+@use "mixins";
+
+.footer-menu {
+    nav {
+        ul {
+            li {
+                a {
+                    @include mixins.mq-down-lg() {
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+    }
+}
+.footer-social {
+    li {
+        a {
+            display: inline-block;
+            position: relative;
+            font-size: 0!important;
+            width: 34px;
+            height: 34px;
+            &:after {
+                content: '';
+                width: 34px;
+                height: 34px;
+                mask-size: 34px 34px;
+                mask-position: center;
+                mask-repeat: no-repeat;
+                background-color: #FFF!important;
+                opacity: 1!important;
+                transition: .3s ease-in-out all;
+            }
+            &:hover {
+                &:after {
+                    transform: scale(1.1);
+                }
+            }
+            &.linkedin {
+                &:after {
+                    mask-image: url(/wp-content/themes/hello-theme-child-master/assets/img/linkedin.svg);
+                }
+            }
+            &.x {
+                &:after {
+                    mask-image: url(/wp-content/themes/hello-theme-child-master/assets/img/x.svg);
+                }
+            }
+        }
+    }
+}

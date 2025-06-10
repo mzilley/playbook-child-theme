@@ -1,0 +1,186 @@
+@use "mixins";
+@use "helpers";
+@use "variables";
+
+div.gform_wrapper {
+    margin-top: 0;
+    margin-bottom: 0;
+    .gform_heading, .gform_validation_errors {
+        display: none;
+    }
+    form {
+        &.newsletter-form {
+            position: relative;
+            .gform-body {
+                .gfield {
+                    width: 100%;
+                    &.gfield--type-captcha {
+                        .ginput_recaptcha {
+                            > div  {
+                                // margin: 0 auto;
+                            }
+                            &:before {
+                                background: none;
+                            }
+                        }
+                    }
+                    label.gfield_label {
+                        font-size: 0;
+                    }
+                    .ginput_container {
+                        position: relative;
+                        display: inline-block;
+                        width: 100%;
+                        color: variables.$black;
+                        border-radius: 16px;
+                        &:before {
+                            content: "";
+                            position: absolute;
+                            inset: 0;
+                            padding: 2px;
+                            background: linear-gradient(90deg, var( --e-global-color-97f5531 ) 0%, var( --e-global-color-primary ) 100%);
+                            -webkit-mask: linear-gradient(white 0 0) content-box, linear-gradient(white 0 0);
+                            -webkit-mask-composite: xor;
+                            mask-composite: exclude;
+                            border-radius: 16px;
+                            pointer-events: none;
+                        }
+                        input {
+                            width: 100%;
+                            background-color: variables.$white;
+                            color: variables.$black;
+                            padding: 10px 60px 10px 10px!important;
+                            border: 0;
+                            border-radius: 16px;
+                            &::placeholder {
+                                color: variables.$black;
+                                opacity: .33;
+                            }
+                        }
+                    }
+                }
+            }
+            .gform-footer {
+                position: absolute;
+                right: 15px;
+                padding: 0!important;
+                margin: 0!important;
+                top: 22.5px;
+                transform: translateY(-50%);
+                button {
+                    font-size: 0;
+                    padding: 0!important;
+                    border: 0!important;
+                    border-radius: 0!important;
+                    background: transparent!important;
+                    margin-bottom: 0!important;
+                    &:before {
+                            display: none!important;
+                    }
+                    &:after {
+                        content: '';
+                        display: inline-block;
+                        width: 19px;
+                        height: 19px;
+                        mask-size: contain;
+                        mask-repeat: no-repeat;
+                        mask-image: url(/wp-content/uploads/2025/02/submit-arrow.svg);
+                        background-color: variables.$black;
+                        @include mixins.transition-all(0.3s);
+                    }
+                    &:hover {
+                        transform: scale(1.1) translateY(-50%);
+                    }
+                }
+            }
+            .validation_message {
+                position: absolute;
+                background-color: #c02b0a;
+                color: variables.$white;
+                border: 0;
+                border-radius: 10px;
+                padding: 5px 10px;
+                font-size: 12px;
+                width: auto;
+            }
+            .gfield_required {
+                font-size: 0;
+            }
+        }
+        .gform-body {
+            .gform_fields {
+                @media (min-width: 576px) and (max-width: 1024px) {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 16px;
+                }
+            }
+            .gfield {
+                padding-right: 0!important;
+                @media (min-width: 576px) and (max-width: 1024px) {
+                    &.form-col-half {
+                        width: calc(50% - 8px);
+                    }
+                    &.form-col-full {
+                        width: 100%;
+                    }
+                }
+                
+                &:first-child {
+                    margin-top: 0!important;
+                }
+                label.gfield_label {
+                    color: variables.$primary;;
+                    font-weight: 400;
+                    font-size: 16px;
+                    line-height: normal;
+                }
+                .ginput_container {
+                    input, select, textarea {
+                        border: 1px solid variables.$primary;
+                        border-radius: 0;
+                        padding: 15px 20px!important;
+                    }
+                    select {
+                        -webkit-appearance: none;
+                        appearance: none;
+                        background-image: url(/wp-content/uploads/2025/01/caret-blue.svg);
+                        background-position: calc(100% - 20px) 50%;
+                        background-repeat: no-repeat;
+                    }
+                }
+            }   
+        }
+        .gform-footer {
+            button[type="submit"] {
+                will-change: transform;
+                position: relative;
+                background: linear-gradient(90deg, var( --e-global-color-97f5531 ) 0%, var( --e-global-color-primary ) 100%);
+                color: variables.$white;
+                border: 0;
+                border-radius: 16px;
+                padding: 10px 20px;
+                @include mixins.transition-all(0.4s);
+                &:before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: 2px;
+                    right: 2px;
+                    bottom: 2px;
+                    left: 2px;
+                    background-color: variables.$primary;
+                    border-radius: 14px;
+                    z-index: -1;
+                    @include mixins.transition-all(0.4s);
+                }
+                &:hover {
+                    &:before {
+                        background-color: transparent;
+                    }
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+}

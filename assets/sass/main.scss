@@ -1,0 +1,46 @@
+@use "_variables";
+@use "_mixins";
+@use "_helpers";
+@use "_cms";
+@use "_header";
+@use "_footer";
+@use "_buttons";
+@use "_filters";
+@use "_banners";
+@use "_forms";
+@use "_popups";
+@use "_subpages";
+
+body {
+    overflow-x: hidden;
+    font-family: var(--e-global-typography-text-font-family)!important;
+}
+
+.e-con {
+    .e-con-inner .e-child .e-con-inner {
+        margin: 0;
+    }
+    > .e-con-inner {
+        > .e-con {
+            margin: 0;
+        }
+    }
+}
+
+address {
+    font-style: normal;
+}
+
+blockquote {
+    font-family: variables.$headings-font-family;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 20px 0;
+    strong {
+        color: variables.$primary;
+    }
+    @include mixins.mq-down-md() {
+        font-size: 24px;
+    }
+}
