@@ -1,5 +1,10 @@
 @use "mixins";
+@use "variables";
+@use "helpers";
 
+footer {
+    position: relative;
+}
 .footer-menu {
     nav {
         ul {
@@ -13,40 +18,77 @@
         }
     }
 }
-.footer-social {
-    li {
-        a {
-            display: inline-block;
-            position: relative;
-            font-size: 0!important;
-            width: 34px;
-            height: 34px;
-            &:after {
-                content: '';
-                width: 34px;
-                height: 34px;
-                mask-size: 34px 34px;
-                mask-position: center;
-                mask-repeat: no-repeat;
-                background-color: #FFF!important;
-                opacity: 1!important;
-                transition: .3s ease-in-out all;
-            }
-            &:hover {
-                &:after {
-                    transform: scale(1.1);
+.footer-menu {
+    ul {
+        @include mixins.mq-down-lg() {
+            flex-direction: column;
+            gap: 10px;
+            li {
+                a {
+                    margin-right: 0!important;
+                    margin-left: 0!important;
                 }
             }
-            &.linkedin {
-                &:after {
-                    mask-image: url(/wp-content/themes/hello-theme-child-master/assets/img/linkedin.svg);
-                }
-            }
-            &.x {
-                &:after {
-                    mask-image: url(/wp-content/themes/hello-theme-child-master/assets/img/x.svg);
+        }
+        li {
+            a {
+                &:hover {
+                    text-decoration: underline;
                 }
             }
         }
     }
+}
+.footer-social {
+    ul {
+        @include mixins.mq-up-md() {
+            gap: 26px;
+        }
+        @include mixins.mq-down-md() {
+            li {
+                &:not(:first-child) {
+                    margin-left: 20px;
+                }
+            }
+        }
+        li {
+            a {
+                display: inline-block;
+                position: relative;
+                font-size: 0!important;
+                width: 32px;
+                height: 32px;
+                padding: 0!important;
+                &:after {
+                    content: '';
+                    top: 0;
+                    left: 0;
+                    width: 32px;
+                    height: 32px;
+                    mask-size: 32px 32px;
+                    mask-position: center;
+                    mask-repeat: no-repeat;
+                    background-color: variables.$white!important;
+                    opacity: 1!important;
+                    transition: .3s ease-in-out all;
+                }
+                &:hover {
+                    &:after {
+                        transform: scale(1.1);
+                    }
+                }
+                &.linkedin {
+                    &:after {
+                        mask-image: url(/wp-content/themes/hello-theme-child-master/assets/img/linkedin.svg);
+                    }
+                }
+                &.instagram {
+                    &:after {
+                        mask-image: url(/wp-content/themes/hello-theme-child-master/assets/img/instagram.svg);
+                    }
+                }
+            }
+        }
+    }
+    
 }

@@ -5,11 +5,13 @@
 @use "_header";
 @use "_footer";
 @use "_buttons";
-@use "_filters";
-@use "_banners";
 @use "_forms";
 @use "_popups";
 @use "_subpages";
+
+html {
+    overflow-x: hidden;
+}
 
 body {
     overflow-x: hidden;
@@ -27,20 +29,393 @@ body {
     }
 }
 
-address {
-    font-style: normal;
-}
-
 blockquote {
-    font-family: variables.$headings-font-family;
-    font-size: 36px;
-    font-weight: 700;
-    line-height: 1.25;
-    margin: 20px 0;
-    strong {
-        color: variables.$primary;
-    }
     @include mixins.mq-down-md() {
         font-size: 24px;
     }
 }
+
+em {
+    letter-spacing: -1.44px;
+}
+
+b, strong {
+    font-weight: 600!important;
+}
+
+.crosshairs {
+    position: absolute!important;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    .crosshair {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        &:after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            mask-image: url(/wp-content/uploads/2025/09/crosshairs.svg);
+            mask-size: 20px;
+            mask-repeat: no-repeat;
+            background-color: variables.$white;
+        }
+        &:nth-of-type(1) {
+            top: 28px;
+                left: 24px;
+        }
+        &:nth-of-type(2) {
+            top: 28px;
+                right: 24px;  
+        }
+        &:nth-of-type(3) {
+            bottom: 28px;
+            right: 24px;    
+        }
+        &:nth-of-type(4) {
+            bottom: 28px;
+                left: 24px;    
+        }
+    }
+}
+
+.dialog-lightbox-widget {
+    .dialog-widget-content {
+        a.dialog-close-button {
+            width: 24px!important;
+            height: 24px!important;
+            transition: .4s ease-in-out all;
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+        @include mixins.mq-down-md() {
+            align-items: center;
+            background-size: cover !important;
+            border-radius: 24px !important;
+            display: flex;
+            height: calc(100vh - 80px) !important;
+            margin: 40px 25px;
+            width: calc(100vw - 50px) !important;
+            background-position: bottom right !important;
+        }
+    }
+}
+
+#hero {
+    @include mixins.mq-up-lg() {
+        background-color: variables.$black!important;
+    }
+}
+
+.case-studies-slider-arrows {
+    display: flex;
+    @include mixins.mq-down-md() {
+        justify-content: space-between;
+        &--container {
+            position: absolute!important;
+        }
+    }
+    .swiper-button {
+        display: inline-block;
+        width: clamp(42px, 3vw, 56px);
+        height: clamp(42px, 3vw, 56px);
+        position: relative;
+        &:after {
+            content: '';
+            display: inline-block;
+            background-image: url(/wp-content/uploads/2025/08/slider-arrow-blue.svg);
+            background-size: clamp(42px, 3vw, 56px);
+            background-repeat: no-repeat;
+            width: clamp(42px, 3vw, 56px);
+            height: clamp(42px, 3vw, 56px);
+            transition: .4s ease-in-out all;
+            @include mixins.mq-down-md() {
+                background-size: 42px;
+            }
+        }
+        &.swiper-button {
+            transition: .4s ease-in-out all;
+            &-prev {
+                left: auto;
+                right: 12px;
+                &:after {
+                    transform: scaleX(-1);
+                }
+                &:hover {
+                    &:after {
+                        transform: scaleX(-1) scale(1.1) ;
+                    }
+                }
+            }
+            &-next {
+                right: 0;
+                &:hover {
+                    &:after {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+            @include mixins.mq-down-md() {
+                &-prev {
+                    right: auto;
+                }
+                &-next {
+                    right: 42px;
+                }
+            }
+        }
+    }
+}
+
+.case-studies-slider {
+    overflow: visible!important;
+    .case-study-slide {
+        border-radius: 40px;
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 40px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.0) 0%, rgba(0, 0, 0, 0.60) 50%);
+        }
+        @include mixins.mq-up-lg() {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;    
+        }
+        transition: .8s ease-in-out all;
+        &.is-visible {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all;
+        }
+        .case-study-inner {
+            border-radius: 40px;
+            line-height: 0;
+            box-shadow: 0 480px 134px 0 rgba(0, 0, 0, 0.00), 0 307px 123px 0 rgba(0, 0, 0, 0.01), 0 173px 104px 0 rgba(0, 0, 0, 0.05), 0 77px 77px 0 rgba(0, 0, 0, 0.09), 0 19px 42px 0 rgba(0, 0, 0, 0.10);
+            // cursor: pointer;
+            &:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border-radius: 40px;                
+            }
+            img {
+                border-radius: 40px;
+                width: 100%;
+                object-fit: cover;
+                aspect-ratio: 3 / 4.75;
+                @include mixins.mq-down-md() {
+                    aspect-ratio: 2 / 2.5;
+                }
+            }
+            .case-study-content {
+                position: absolute;
+                width: calc(100% - 40px);
+                left: 20px;
+                right: 20px;
+                bottom: 20px;
+                * {
+                    font-family: var(--e-global-typography-primary-font-family);
+                    letter-spacing: 0;
+                    font-style: normal;
+                    color: variables.$white;
+                    font-weight: 500;
+                    b {
+                        font-weight: 700;
+                    }
+                }
+                p {
+                    line-height: 1.5;
+                }
+            }
+        }
+    }
+}
+
+#testimonials {
+    &:before {
+        content: '';
+        background-image: url(/wp-content/uploads/2025/08/logo-mark.svg);
+        background-position: top left;
+        background-repeat: no-repeat;
+        opacity: .05;
+    }
+}
+
+.testimonial-slider {
+    max-width: 935px;
+    margin: 0 auto;
+    .testimonial-slide {  
+        .testimonial {
+            &-content {
+                display: grid;
+                grid-template-columns: repeat(12, 1fr);
+                gap: 80px;
+                align-items: center;
+                @include mixins.mq-down-lg() {
+                    display: flex;
+                    flex-direction: column-reverse;
+                    .testimonial {
+                        &-text {
+                            grid-column: 2 / span 10;
+                            text-align: center;
+                        }
+                        &-person {
+                            grid-column: 2 / span 10;
+                            display: flex;
+                            justify-content: center;
+                            flex-direction: column;
+                            align-items: center;
+                            text-align: center;
+                        }
+                    }
+                }
+                @include mixins.mq-down-sm() {
+                    .testimonial {
+                        &-text, &-person {
+                            grid-column-end: span 12;
+                        }
+                    }
+                }
+            }
+            &-text {
+                font-family: variables.$instrument-sans;
+                color: variables.$white;
+                font-style: normal;
+                font-size: clamp(20.4px, 2vw, 27px);
+                line-height: 1.5;
+                margin-bottom: 0;
+                grid-column-end: span 8;
+            }
+            &-person {
+                grid-column-end: span 4;
+                img {
+                    max-width: 150px;
+                    max-height: 100px;
+                }
+                .logo {
+                    margin-bottom: 20px;
+                }
+                .person-details {
+                    * {
+                        color: variables.$white;
+                        font-family: variables.$instrument-sans;
+                        font-style: normal;
+                        letter-spacing: 0;
+                    }
+                    strong {
+                        font-size: 20.4px;
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+.testimonial-slider-arrows, .buildings-slider-arrows, .testimonial-card-arrows, .careers-slider-arrows, .team-slider-arrows {
+    @include mixins.mq-down-lg() {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    position: relative;
+    height: 42px;
+    z-index: 10;
+    margin-top: 72px;
+    .swiper-button {
+        width: clamp(42px, 3vw, 56px);
+        height: clamp(42px, 3vw, 56px);
+        &:after {
+            content: '';
+            background-image: url(/wp-content/uploads/2025/08/slider-arrow.svg);
+            background-size: clamp(42px, 3vw, 56px);
+            background-repeat: no-repeat;
+            width: clamp(42px, 3vw, 56px);
+            height: clamp(42px, 3vw, 56px);
+            transition: .4s ease-in-out all;
+        }
+        &.swiper-button {
+            position: relative;
+            transition: .4s ease-in-out all;
+            @include mixins.mq-down-lg() {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: all;
+                position: relative;
+            }
+            &-prev {
+                left: 0;
+                @include mixins.mq-down-xl() {
+                    
+                }
+                &:after {
+                    transform: scaleX(-1);
+                }
+                &:hover {
+                    &:after {
+                        transform: scaleX(-1) scale(1.1);
+                    }
+                }
+            }
+            &-next {
+                right: 0;
+                @include mixins.mq-down-xl() {
+                    
+                }
+                &:hover {
+                    &:after {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.bento {
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(180deg, rgba(42, 87, 133, 0) 0, rgba(42, 87, 133, .85) 65%, rgba(42, 87, 133, 1) 97.5%);
+        z-index: 0;
+    }
+    > div {
+        z-index: 1;
+    }
+    .bento {
+        &-grid {
+            @include mixins.mq-down-md() {
+                display: flex!important;
+                flex-direction: column!important;
+                &:last-child {
+                    > div {
+                        &:first-child {
+                            order: 2;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

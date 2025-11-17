@@ -2,185 +2,353 @@
 @use "helpers";
 @use "variables";
 
-div.gform_wrapper {
-    margin-top: 0;
-    margin-bottom: 0;
-    .gform_heading, .gform_validation_errors {
-        display: none;
-    }
-    form {
-        &.newsletter-form {
-            position: relative;
-            .gform-body {
-                .gfield {
-                    width: 100%;
-                    &.gfield--type-captcha {
-                        .ginput_recaptcha {
-                            > div  {
-                                // margin: 0 auto;
-                            }
-                            &:before {
-                                background: none;
-                            }
-                        }
-                    }
-                    label.gfield_label {
-                        font-size: 0;
-                    }
-                    .ginput_container {
-                        position: relative;
-                        display: inline-block;
-                        width: 100%;
-                        color: variables.$black;
-                        border-radius: 16px;
-                        &:before {
-                            content: "";
-                            position: absolute;
-                            inset: 0;
-                            padding: 2px;
-                            background: linear-gradient(90deg, var( --e-global-color-97f5531 ) 0%, var( --e-global-color-primary ) 100%);
-                            -webkit-mask: linear-gradient(white 0 0) content-box, linear-gradient(white 0 0);
-                            -webkit-mask-composite: xor;
-                            mask-composite: exclude;
-                            border-radius: 16px;
-                            pointer-events: none;
-                        }
-                        input {
-                            width: 100%;
-                            background-color: variables.$white;
-                            color: variables.$black;
-                            padding: 10px 60px 10px 10px!important;
-                            border: 0;
-                            border-radius: 16px;
-                            &::placeholder {
-                                color: variables.$black;
-                                opacity: .33;
-                            }
-                        }
-                    }
+.hbspt-form {
+  background-color: #fff;
+  border-radius: 24px;
+  box-shadow: 0 343px 96px 0 transparent, 0 219px 88px 0 rgba(0, 0, 0, 0.01),
+    0 123px 74px 0 rgba(0, 0, 0, 0.05), 0 55px 55px 0 rgba(0, 0, 0, 0.09),
+    0 14px 30px 0 rgba(0, 0, 0, 0.1);
+  padding: 36px 36px 56px;
+  position: relative;
+  form {
+    fieldset {
+      max-width: none;
+      &.form-columns-2 {
+        > div {
+          &:first-child {
+            .input {
+              margin-right: 11px;
+            }
+            label.hs-error-msg {
+                
+            }
+          }
+          &:nth-child(2) {
+            .input {
+              margin-left: 11px;
+              margin-right: 0;
+            }
+            label.hs-error-msg {
+                margin-left: 11px;
+            }
+          }
+        }
+        @media (max-width: 575px) {
+            > div {
+                width: 100%!important;
+                .input {
+                    margin-right: 0!important;
+                    margin-left: 0!important;
+    
                 }
             }
-            .gform-footer {
-                position: absolute;
-                right: 15px;
-                padding: 0!important;
-                margin: 0!important;
-                top: 22.5px;
-                transform: translateY(-50%);
-                button {
-                    font-size: 0;
-                    padding: 0!important;
-                    border: 0!important;
-                    border-radius: 0!important;
-                    background: transparent!important;
-                    margin-bottom: 0!important;
-                    &:before {
-                            display: none!important;
-                    }
-                    &:after {
-                        content: '';
-                        display: inline-block;
-                        width: 19px;
-                        height: 19px;
-                        mask-size: contain;
-                        mask-repeat: no-repeat;
-                        mask-image: url(/wp-content/uploads/2025/02/submit-arrow.svg);
-                        background-color: variables.$black;
-                        @include mixins.transition-all(0.3s);
-                    }
-                    &:hover {
-                        transform: scale(1.1) translateY(-50%);
+        }
+      }
+      div.hs-form-field {
+        label {
+          span {
+            font-size: 0;
+            line-height: 0;
+          }
+        }
+        input,
+        select,
+        textarea {
+          border: 2px solid #e1e1e1;
+          border-radius: 10px;
+          box-shadow: none;
+          color: var(--e-global-color-text);
+          font-size: clamp(17px, 3vw, 20.4px);
+          font-weight: 600;
+          line-height: 1.45;
+          padding: 16px 20px !important;
+          width: 100% !important;
+          &::placeholder {
+            color: #d5d5d5;
+          }
+        }
+        textarea {
+          min-height: 225px;
+        }
+        select {
+            appearance: none;
+            background-image: url(https://playbook.local/wp-content/uploads/2025/09/playbook-select.svg);
+            background-repeat: no-repeat;
+            background-size: 20px;
+            background-position: calc(100% - 20px) 50%;
+        }
+        .input {
+          margin-right: 0;
+          ul.inputs-list {
+            list-style: none;
+            padding-left: 0;
+            column-count: 2;
+            li {
+              label {
+                display: flex;
+                align-items: center;
+                justify-content: start;
+                input {
+                    appearance: none;
+                    position: relative;
+                    width: 20px !important;
+                    height: 20px;
+                    background-image: url(/wp-content/uploads/2025/09/playbook-unchecked.svg);
+                    background-size: 20px;
+                    background-repeat: no-repeat;
+                    background-position: 0%;
+                    padding: 0 !important;
+                    border-radius: 2px;
+                    border: 0;
+                    transition: .4s ease-in-out all;
+                    &:checked {
+                        background-image: url(/wp-content/uploads/2025/09/playbook-check.svg);
                     }
                 }
+                span {
+                  font-size: 18px;
+                  line-height: 1.75;
+                  font-weight: 500;
+                  color: variables.$black;
+                  margin-left: 8px;
+                }
+              }
             }
-            .validation_message {
-                position: absolute;
+          }
+        }
+        ul.hs-error-msgs {
+            list-style-type: none;
+            padding-left: 0;
+            label.hs-error-msg {
                 background-color: #c02b0a;
                 color: variables.$white;
                 border: 0;
                 border-radius: 10px;
                 padding: 5px 10px;
+                margin-top: 8px;
                 font-size: 12px;
                 width: auto;
             }
-            .gfield_required {
-                font-size: 0;
-            }
         }
-        .gform-body {
-            .gform_fields {
-                @media (min-width: 576px) and (max-width: 1024px) {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 16px;
-                }
-            }
-            .gfield {
-                padding-right: 0!important;
-                @media (min-width: 576px) and (max-width: 1024px) {
-                    &.form-col-half {
-                        width: calc(50% - 8px);
-                    }
-                    &.form-col-full {
-                        width: 100%;
-                    }
-                }
-                
-                &:first-child {
-                    margin-top: 0!important;
-                }
-                label.gfield_label {
-                    color: variables.$primary;;
-                    font-weight: 400;
-                    font-size: 16px;
-                    line-height: normal;
-                }
-                .ginput_container {
-                    input, select, textarea {
-                        border: 1px solid variables.$primary;
-                        border-radius: 0;
-                        padding: 15px 20px!important;
-                    }
-                    select {
-                        -webkit-appearance: none;
-                        appearance: none;
-                        background-image: url(/wp-content/uploads/2025/01/caret-blue.svg);
-                        background-position: calc(100% - 20px) 50%;
-                        background-repeat: no-repeat;
-                    }
-                }
-            }   
-        }
-        .gform-footer {
-            button[type="submit"] {
-                will-change: transform;
-                position: relative;
-                background: linear-gradient(90deg, var( --e-global-color-97f5531 ) 0%, var( --e-global-color-primary ) 100%);
+        
+      }
+    }
+    div.hs_error_rollup {
+        ul.hs-error-msgs {
+            list-style-type: none;
+            padding-left: 0;
+            label {
+                background-color: #c02b0a;
                 color: variables.$white;
                 border: 0;
-                border-radius: 16px;
-                padding: 10px 20px;
-                @include mixins.transition-all(0.4s);
-                &:before {
-                    content: "";
-                    display: block;
-                    position: absolute;
-                    top: 2px;
-                    right: 2px;
-                    bottom: 2px;
-                    left: 2px;
-                    background-color: variables.$primary;
-                    border-radius: 14px;
-                    z-index: -1;
-                    @include mixins.transition-all(0.4s);
-                }
-                &:hover {
-                    &:before {
-                        background-color: transparent;
-                    }
-                    transform: scale(1.1);
-                }
+                border-radius: 10px;
+                padding: 5px 10px;
+                margin-top: 8px;
+                font-size: 12px;
+                width: auto;
             }
         }
     }
+
+    .actions {
+      justify-content: center;
+      margin-top: 65px;
+      input[type="submit"] {
+        display: inline-block !important;
+        flex-grow: 1 !important;
+        font-size: 17px !important;
+        font-weight: 500 !important;
+        height: 82px !important;
+        border-radius: 100px !important;
+        width: 100% !important;
+        background-color: variables.$primary !important;
+        color: variables.$white !important;
+        transition: 0.5s ease-in-out all !important;
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+}
+
+div.gform_wrapper {
+  margin-top: 0;
+  margin-bottom: 0;
+  .gform_heading,
+  .gform_validation_errors {
+    display: none;
+  }
+  form {
+    &.form {
+      position: relative;
+      padding: 36px 36px 56px 36px;
+      border-radius: 24px;
+      box-shadow: 0 343px 96px 0 rgba(0, 0, 0, 0),
+        0 219px 88px 0 rgba(0, 0, 0, 0.01), 0 123px 74px 0 rgba(0, 0, 0, 0.05),
+        0 55px 55px 0 rgba(0, 0, 0, 0.09), 0 14px 30px 0 rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      .gform-body {
+        .gform_fields {
+          gap: 22px;
+        }
+        .gfield {
+          width: 100%;
+          &.gfield--type-captcha {
+            .ginput_recaptcha {
+              &:before {
+                background: none;
+              }
+            }
+          }
+          label.gfield_label {
+            font-size: 0;
+            margin: 0;
+          }
+          .ginput_container {
+            display: inline-block;
+            width: 100%;
+            color: variables.$black;
+            border-radius: 10px;
+            input,
+            select,
+            textarea {
+              width: 100%;
+              font-size: clamp(17px, 3vw, 20.4px);
+              line-height: 1.45;
+              font-weight: 600;
+              color: variables.$black;
+              padding: 16px 20px !important;
+              border: 0;
+              border: 2px solid #e1e1e1;
+              border-radius: 10px;
+              box-shadow: none;
+              &::placeholder {
+                color: #d5d5d5;
+              }
+            }
+            input,
+            select {
+              height: 62px;
+            }
+            textarea {
+              height: 370px;
+            }
+          }
+        }
+      }
+      .gform_footer {
+        justify-content: center;
+        margin-top: 65px;
+        button[type="submit"] {
+          display: inline-block !important;
+          flex-grow: 1 !important;
+          font-size: 17px !important;
+          font-weight: 500 !important;
+          height: 82px !important;
+          max-width: 500px !important;
+          border-radius: 100px !important;
+          background-color: variables.$primary !important;
+          color: variables.$white !important;
+          transition: 0.5s ease-in-out all !important;
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+      }
+      .validation_message {
+        background-color: #c02b0a;
+        color: variables.$white;
+        border: 0;
+        border-radius: 10px;
+        padding: 5px 10px;
+        font-size: 12px;
+        width: auto;
+      }
+      .gfield_required {
+        font-size: 0;
+      }
+    }
+    .gform-body {
+      .gform_fields {
+        @media (min-width: 576px) and (max-width: 1024px) {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 16px;
+        }
+      }
+      .gfield {
+        padding-right: 0 !important;
+        @media (min-width: 576px) and (max-width: 1024px) {
+          &.form-col-half {
+            width: calc(50% - 8px);
+          }
+          &.form-col-full {
+            width: 100%;
+          }
+        }
+
+        &:first-child {
+          margin-top: 0 !important;
+        }
+        label.gfield_label {
+          color: variables.$primary;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 1.5;
+        }
+        .ginput_container {
+          input,
+          select,
+          textarea {
+            border: 1px solid variables.$primary;
+            border-radius: 0;
+            padding: 15px 20px !important;
+          }
+          select {
+            -webkit-appearance: none;
+            appearance: none;
+            // background-image: url(/wp-content/uploads/2025/01/caret-blue.svg);
+            background-position: calc(100% - 20px) 50%;
+            background-repeat: no-repeat;
+          }
+        }
+      }
+    }
+    .gform-footer {
+      button[type="submit"] {
+        will-change: transform;
+        position: relative;
+        background: linear-gradient(
+          90deg,
+          var(--e-global-color-97f5531) 0%,
+          var(--e-global-color-primary) 100%
+        );
+        color: variables.$white;
+        border: 0;
+        border-radius: 16px;
+        padding: 10px 20px;
+        @include mixins.transition-all(0.4s);
+        &:before {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 2px;
+          right: 2px;
+          bottom: 2px;
+          left: 2px;
+          background-color: variables.$primary;
+          border-radius: 14px;
+          z-index: -1;
+          @include mixins.transition-all(0.4s);
+        }
+        &:hover {
+          &:before {
+            background-color: transparent;
+          }
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
 }
